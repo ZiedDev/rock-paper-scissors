@@ -1,3 +1,10 @@
+let playerSelection = String(prompt("choose either rock | paper | scissors")).toLowerCase();
+let computerSelection = getComputerChoice();
+
+let playerScore = 0;
+let computerScore = 0;
+let scoreToWin = 5;
+
 function getComputerChoice() {
     let x = Math.floor(Math.random() * 3);
     if (x == 0) {
@@ -10,14 +17,6 @@ function getComputerChoice() {
         return "scissors";
     }
 }
-
-const playerSelection = String(prompt("chose either rock | paper | scissors")).toLowerCase();
-const computerSelection = getComputerChoice();
-
-let playerScore = 0;
-let computerScore = 0;
-
-// console.log(computerSelection);
 
 function playRound(playerSelection, computerSelection) {
     // if user chose rock
@@ -56,10 +55,27 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-alert(`you: ${playerSelection}
-computer: ${computerSelection}
-${playRound(playerSelection, computerSelection)}`);
+function round() {
+    if (playRound(playerSelection, computerSelection) == "win")
+        return playerScore++;
+    else if (playRound(playerSelection, computerSelection) == "lose")
+        return computerScore++;
+}
 
 function game() {
+    while (playerScore < scoreToWin && computerScore < scoreToWin) {
+        playerSelection = String(prompt("choose either rock | paper | scissors")).toLowerCase();
+        computerSelection = getComputerChoice();
 
+        console.log(round());
+
+        alert(`you: ${playerSelection}
+computer: ${computerSelection}
+player score: ${playerScore}
+computer score: ${computerScore}`);
+    }
 }
+
+console.log(game());
+alert(`Game ended.
+${playerScore > computerScore ? "You won" : "You lost"}`);
