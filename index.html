@@ -11,18 +11,39 @@
 <body>
 
     <div class="header">
-        <h1>Rock Paper Scissors</h1>
+        <h1 class="fancy-underline fancy-underline3">Rock Paper Scissors</h1>
+
+        <button class="reset-button" onclick="resetGame()" id="reset-button">
+            <h2>reset</h2>
+        </button>
     </div>
 
-    <div class="selection-container">
-        <div class="selction" id="rock">Rock</div>
+    <div class="selections-container">
+        <button class="selction" id="rock">rock<img src="./images/emojis/rock.png" alt="rock"></button>
 
-        <div class="selction" id="paper">Paper</div>
+        <button class="selction" id="paper">paper<img src="./images/emojis/paper.png" alt="paper"></button>
 
-        <div class="selction" id="scissors">Scissors</div>
+        <button class="selction" id="scissors">scissors<img src="./images/emojis/scissors.png" alt="scissors"></button>
     </div>
 
-    <div class="result" id="result">result: </div>
+    <div class="game" id="result">
+        <h1 id="game-header">First to 5 wins</h1>
+
+        <div class="result" id="result">
+            <div class="choice-card">
+                <h2 id="player-score">Player: 0</h2>
+                <div class="player-choice" id="player-choice">
+                    <img id="player-choice-image">
+                </div>
+            </div>
+            <div class="choice-card">
+                <h2 id="computer-score">Computer: 0</h2>
+                <div class="computer-choice" id="computer-choice">
+                    <img id="computer-choice-image">
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="./script.js"></script>
 </body>

@@ -1,8 +1,16 @@
-//DOM manipulation
+//DOM manipulationrock
 const rock = document.getElementById("rock");
 const paper = document.getElementById("paper");
 const scissors = document.getElementById("scissors");
-const result = document.getElementById("result");
+
+const playerChoiceImage = document.getElementById("player-choice-image");
+const computerChoiceImage = document.getElementById("computer-choice-image");
+
+const playerScoreText = document.getElementById("player-score");
+const computerScoreText = document.getElementById("computer-score");
+
+const gameHeader = document.getElementById("game-header");
+const resetButton = document.getElementById("reset-button");
 
 rock.addEventListener("click", () => {
     getPlayerChoice(rock);
@@ -19,7 +27,7 @@ scissors.addEventListener("click", () => {
     game();
 });
 
-let playerSelection; //= String(prompt("choose either rock | paper | scissors")).toLowerCase();
+let playerSelection;
 let computerSelection = getComputerChoice();
 
 let playerScore = 0;
@@ -28,7 +36,6 @@ let scoreToWin = 5;
 
 function getPlayerChoice(element) {
     playerSelection = String(element.textContent).toLowerCase();
-    console.log(playerSelection);
 }
 
 function getComputerChoice() {
@@ -91,39 +98,37 @@ function round() {
 function game() {
     if (playerScore < scoreToWin && computerScore < scoreToWin) {
         computerSelection = getComputerChoice();
-        console.log(round());
+        round();
 
-        result.textContent = `result: 
-        \nyou: ${playerSelection}
-        \ncomputer: ${computerSelection}
-        \nplayer score: ${playerScore}
-        \ncomputer score: ${computerScore}`;
-    } else {
-        result.textContent = `result: 
-        \nyou: ${playerSelection}
-        \ncomputer: ${computerSelection}
-        \nplayer score: ${playerScore}
-        \ncomputer score: ${computerScore}
-        \nGame ended. 
-        \n${playerScore > computerScore ? "You won" : "You lost"}`
+        playerChoiceImage.src = `./images/emojis/${playerSelection}.png`;
+
+        computerChoiceImage.src = `./images/emojis/${computerSelection}.png`;
+
+        playerScoreText.textContent = `Player: ${playerScore}`
+        computerScoreText.textContent = `Computer: ${computerScore}`
+    }
+    if (playerScore == scoreToWin || computerScore == scoreToWin) {
+        playerChoiceImage.src = `./images/emojis/${playerSelection}.png`;
+
+        computerChoiceImage.src = `./images/emojis/${computerSelection}.png`;
+
+        playerScoreText.textContent = `Player: ${playerScore}`
+        computerScoreText.textContent = `Computer: ${computerScore}`
+
+        playerScore > computerScore ? gameHeader.textContent = "You win" : gameHeader.textContent = "You lost";
     }
 }
 
-// function game() {
-//     while (playerScore < scoreToWin && computerScore < scoreToWin) {
-//         playerSelection = String(prompt("choose either rock | paper | scissors")).toLowerCase();
-//         computerSelection = getComputerChoice();
+function resetGame() {
+    playerScore = 0;
+    computerScore = 0;
 
-//         console.log(round());
+    playerChoiceImage.src = ``;
 
-//         result.textContent = `result:
-//         you: ${playerSelection}
-//         computer: ${computerSelection}
-//         player score: ${playerScore}
-//         computer score: ${computerScore}`;
-//     }
-// }
+    computerChoiceImage.src = ``;
 
-// console.log(game());
-// alert(`Game ended.
-// ${playerScore > computerScore ? "You won" : "You lost"}`);
+    playerScoreText.textContent = `Player: ${playerScore}`
+    computerScoreText.textContent = `Computer: ${computerScore}`
+
+    gameHeader.textContent = "First to 5 wins"
+}
